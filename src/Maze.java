@@ -1,26 +1,40 @@
+import java.util.ArrayList;
+
 public class Maze {
 
-    char[][] maze;
+    private Node[][] nodeMaze;
+    private ArrayList<Node> baseNodes = new ArrayList<>();
     private int mazeDim;
 
 
     public Maze(char[][] textMaze) {
         mazeDim = textMaze[0].length;
-        maze = new char[mazeDim][mazeDim];
+        nodeMaze = new Node[mazeDim][mazeDim];
         for (int x = 0; x < mazeDim; x++) {
             for (int y = 0; y < mazeDim; y++) {
-                maze[x][y] = textMaze[x][y];
+                Node temp = new Node( x, y, textMaze[x][y]);
+                nodeMaze[x][y] = temp;
+                if(temp.getBase()){
+                    baseNodes.add(temp);
+                }
             }
         }
-        System.out.println("MazeDim is " + mazeDim);
     }
 
     public void printMaze() {
         for (int x = 0; x < mazeDim; x++) {
             for (int y = 0; y < mazeDim; y++) {
-                System.out.print(maze[x][y] + " ");
+                System.out.print(nodeMaze[x][y].getValue() + " ");
             }
-            System.out.print("\n");
+            System.out.println();
         }
+        System.out.println();
+    }
+
+    public void printBaseNodes(){
+        for (Node baseNode : baseNodes) {
+            System.out.print(baseNode.getValue() + " ");
+        }
+        System.out.println();
     }
 }
