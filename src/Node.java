@@ -11,6 +11,14 @@ class Node {
         base = value != '_';
     }
 
+    public int getX(){
+        return xCoord;
+    }
+
+    public int getY(){
+        return yCoord;
+    }
+
     public char getValue(){
         return value;
     }

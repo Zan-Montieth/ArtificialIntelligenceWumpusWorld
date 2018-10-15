@@ -24,7 +24,25 @@ public class Maze {
         }
     }
 
-    public void printMaze() {
+    public void solveMaze(){                                                                                            //will solve our maze
+
+    }
+
+    private Node checkNieghborsFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
+        if( 0 <= inNode.getX() + 1 && inNode.getX() + 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() + 1][inNode.getY()].getValue()){
+            return nodeMaze[inNode.getX()+1][inNode.getY()];
+        }else if( 0 <= inNode.getX() - 1 && inNode.getX() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() - 1][inNode.getY()].getValue()){
+            return nodeMaze[inNode.getX()-1][inNode.getY()];
+        }else if( 0 <= inNode.getY() + 1 && inNode.getY() + 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX()][inNode.getY() + 1].getValue()){
+            return nodeMaze[inNode.getX()][inNode.getY()+1];
+        }else if( 0 <= inNode.getY() - 1 && inNode.getY() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX()][inNode.getY() - 1].getValue()){
+            return nodeMaze[inNode.getX()][inNode.getY()-1];
+        }else{
+            return null;
+        }
+    }
+
+    public void printMaze() {                       //will print out the maze, printing each nodes value which is a char
         for (int x = 0; x < mazeDim; x++) {
             for (int y = 0; y < mazeDim; y++) {
                 System.out.print(nodeMaze[x][y].getValue() + " ");
@@ -34,7 +52,7 @@ public class Maze {
         System.out.println();
     }
 
-    public void printBaseNodes(){
+    public void printBaseNodes(){                   //prints all none empty nodes
         for (Node baseNode : baseNodes) {
             System.out.print(baseNode.getValue() + " ");
         }

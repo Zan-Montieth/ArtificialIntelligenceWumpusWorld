@@ -14,6 +14,7 @@ public class Driver {
         Maze fourteenMaze = readMazeIn("14x14maze.txt");
 
         fiveMaze.printBaseNodes();
+        fiveMaze.solveMaze();
         fiveMaze.printMaze();
 
         sevenMaze.printBaseNodes();
