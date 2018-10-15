@@ -13,26 +13,26 @@ public class Driver {
         Maze twelveMaze   = readMazeIn("12x12maze.txt");
         Maze fourteenMaze = readMazeIn("14x14maze.txt");
 
-        fiveMaze.printBaseNodes();
+        fiveMaze.printColorBaseNodes();
         fiveMaze.solveMaze();
         fiveMaze.printColorMaze();
 
-        sevenMaze.printBaseNodes();
+        sevenMaze.printColorBaseNodes();
         sevenMaze.printColorMaze();
 
-        eightMaze.printBaseNodes();
+        eightMaze.printColorBaseNodes();
         eightMaze.printColorMaze();
 
-        nineMaze.printBaseNodes();
+        nineMaze.printColorBaseNodes();
         nineMaze.printColorMaze();
 
-        tenMaze.printBaseNodes();
+        tenMaze.printColorBaseNodes();
         tenMaze.printColorMaze();
 
-        twelveMaze.printBaseNodes();
+        twelveMaze.printColorBaseNodes();
         twelveMaze.printColorMaze();
 
-        fourteenMaze.printBaseNodes();
+        fourteenMaze.printColorBaseNodes();
         fourteenMaze.printColorMaze();
 
         System.out.println("Program Done");

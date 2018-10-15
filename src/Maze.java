@@ -100,7 +100,7 @@ public class Maze {
         System.out.println();
     }
 
-    public void printBaseNodes(){                   //prints all none empty nodes
+    public void printColorBaseNodes(){                   //prints all none empty nodes
         for (Node baseNode : baseNodes) {
             if(baseNode.getValue() == 'A') {
                 System.out.print(ANSI_CYAN + baseNode.getValue() + ANSI_RESET + " ");
@@ -125,6 +125,13 @@ public class Maze {
             }else if(baseNode.getValue() == 'Y'){
                 System.out.print(ANSI_YELLOW + baseNode.getValue() + ANSI_RESET + " ");
             }
+        }
+        System.out.println();
+    }
+
+    public void printBaseNodes(){                   //prints all none empty nodes
+        for (Node baseNode : baseNodes) {
+                System.out.print(baseNode.getValue() + " ");
         }
         System.out.println();
     }
