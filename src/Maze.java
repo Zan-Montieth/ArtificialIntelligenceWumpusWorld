@@ -4,6 +4,7 @@ public class Maze {
 
     private Node[][] nodeMaze;
     private ArrayList<Node> baseNodes = new ArrayList<>();
+    private ArrayList<Node> emptyNodes = new ArrayList<>();
     private int mazeDim;
 
 
@@ -16,6 +17,8 @@ public class Maze {
                 nodeMaze[x][y] = temp;
                 if(temp.getBase()){
                     baseNodes.add(temp);
+                }else {
+                    emptyNodes.add(temp);
                 }
             }
         }
