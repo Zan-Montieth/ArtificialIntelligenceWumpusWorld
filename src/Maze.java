@@ -63,7 +63,7 @@ public class Maze {
         }
     }
 
-    private Node checkUpNeighborsFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
+    private Node checkUpNeighborFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
         if( 0 <= inNode.getY() - 1 && inNode.getY() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX()][inNode.getY() - 1].getValue()){
             return nodeMaze[inNode.getX()][inNode.getY()-1];
         }else{
@@ -106,25 +106,6 @@ public class Maze {
         return temp;
     }
 
-    private boolean getToFrom(Node inFrom, Node inTo){
-        boolean path = false;
-        int directionalX = inFrom.getX() - inTo.getX();
-        int directionalY = inFrom.getY() - inTo.getX();
-        if(directionalY < 0 ){
-            //have to search up
-        }else if(directionalY > 0){
-            //have to search down
-        }
-        //else were at the right Y
-        if(directionalX > 0) {
-            //have to search left
-        }else if(directionalX < 0) {
-            //have to search down
-        }
-
-
-        return path;
-    }
 
     public void printMaze() {                       //will print out the maze, printing each nodes value which is a char
         for (int x = 0; x < mazeDim; x++) {
