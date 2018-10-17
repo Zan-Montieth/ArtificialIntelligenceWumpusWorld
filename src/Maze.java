@@ -4,20 +4,22 @@ public class Maze {
 
     private Node[][] nodeMaze;
     private ArrayList<Node> baseNodes = new ArrayList<>();
+    private int numOfLines;
     private ArrayList<Node> emptyNodes = new ArrayList<>();
+    private Node temp;
     private int mazeDim;
 
 
     //used to color output
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    private String ANSI_RESET = "\u001B[0m";
+    private String ANSI_BLACK = "\u001B[30m";
+    private String ANSI_RED = "\u001B[31m";
+    private String ANSI_GREEN = "\u001B[32m";
+    private String ANSI_YELLOW = "\u001B[33m";
+    private String ANSI_BLUE = "\u001B[34m";
+    private String ANSI_PURPLE = "\u001B[35m";
+    private String ANSI_CYAN = "\u001B[36m";
+    private String ANSI_WHITE = "\u001B[37m";
 
 
 
@@ -35,14 +37,19 @@ public class Maze {
                 }
             }
         }
+        numOfLines = baseNodes.size()/2;
+        for (Node emptyNode : emptyNodes) {
+            emptyNode.instantiatePossibleValues(numOfLines);
+        }
     }
 
     public void solveMaze(){                                                                                            //will solve our maze
-                                                                                                                        //forward checking setting nodes up for forward checking
+        temp = checkNeighborsFor(baseNodes.get(0) , '_');
+
         //TODO Solve the maze
     }
 
-    private Node checkNieghborsFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
+    private Node checkNeighborsFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
         if( 0 <= inNode.getX() + 1 && inNode.getX() + 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() + 1][inNode.getY()].getValue()){
             return nodeMaze[inNode.getX()+1][inNode.getY()];
         }else if( 0 <= inNode.getX() - 1 && inNode.getX() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() - 1][inNode.getY()].getValue()){
@@ -54,6 +61,69 @@ public class Maze {
         }else{
             return null;
         }
+    }
+
+    private Node checkUpNeighborsFor(Node inNode, char inSearchFor){                                                      //can be used to find empty spaces or partner
+        if( 0 <= inNode.getY() - 1 && inNode.getY() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX()][inNode.getY() - 1].getValue()){
+            return nodeMaze[inNode.getX()][inNode.getY()-1];
+        }else{
+            return null;
+        }
+    }
+
+    private Node checkDownNeighborFor(Node inNode, char inSearchFor){
+        if( 0 <= inNode.getY() + 1 && inNode.getY() + 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX()][inNode.getY() + 1].getValue()){
+            return nodeMaze[inNode.getX()][inNode.getY()+1];
+        }else{
+            return null;
+        }
+    }
+
+    private Node checkLeftNeighborFor(Node inNode, char inSearchFor){
+        if( 0 <= inNode.getX() - 1 && inNode.getX() - 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() - 1][inNode.getY()].getValue()){
+            return nodeMaze[inNode.getX()-1][inNode.getY()];
+        }else{
+            return null;
+        }
+    }
+
+    private Node checkRightNeighborFor(Node inNode, char inSearchFor){
+        if( 0 <= inNode.getX() + 1 && inNode.getX() + 1 < mazeDim && inSearchFor == nodeMaze[inNode.getX() + 1][inNode.getY()].getValue()){
+            return nodeMaze[inNode.getX()+1][inNode.getY()];
+        }else{
+            return null;
+        }
+    }
+
+    private Node undo(Node inNode){
+        Node temp = inNode;
+        if(!inNode.getBase()) {
+            inNode.setValue('_');
+        } else {
+            return null;
+        }
+        temp = checkNeighborsFor(temp, temp.getValue());
+        return temp;
+    }
+
+    private boolean getToFrom(Node inFrom, Node inTo){
+        boolean path = false;
+        int directionalX = inFrom.getX() - inTo.getX();
+        int directionalY = inFrom.getY() - inTo.getX();
+        if(directionalY < 0 ){
+            //have to search up
+        }else if(directionalY > 0){
+            //have to search down
+        }
+        //else were at the right Y
+        if(directionalX > 0) {
+            //have to search left
+        }else if(directionalX < 0) {
+            //have to search down
+        }
+
+
+        return path;
     }
 
     public void printMaze() {                       //will print out the maze, printing each nodes value which is a char
@@ -100,7 +170,7 @@ public class Maze {
         System.out.println();
     }
 
-    public void printColorBaseNodes(){                   //prints all none empty nodes
+    public void printColorBaseNodes(){                   //prints all none empty nodes in color
         for (Node baseNode : baseNodes) {
             if(baseNode.getValue() == 'A') {
                 System.out.print(ANSI_CYAN + baseNode.getValue() + ANSI_RESET + " ");
@@ -129,7 +199,7 @@ public class Maze {
         System.out.println();
     }
 
-    public void printBaseNodes(){                   //prints all none empty nodes
+    public void printBaseNodes(){                   //prints all none empty nodes without color
         for (Node baseNode : baseNodes) {
                 System.out.print(baseNode.getValue() + " ");
         }
