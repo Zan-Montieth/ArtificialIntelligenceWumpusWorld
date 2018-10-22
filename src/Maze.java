@@ -1,13 +1,7 @@
-import java.util.ArrayList;
-
 public class Maze {
 
     private Node[][] nodeMaze;
-    private ArrayList<Node> baseNodes = new ArrayList<>();
-    private int numOfLines;
-    private ArrayList<Node> emptyNodes = new ArrayList<>();
     private Node temp;
-    private int mazeDim;
 
 
     //used to color output
@@ -23,24 +17,21 @@ public class Maze {
 
 
 
-    public Maze(char[][] textMaze) {
-        mazeDim = textMaze[0].length;
-        nodeMaze = new Node[mazeDim][mazeDim];
-        for (int x = 0; x < mazeDim; x++) {
-            for (int y = 0; y < mazeDim; y++) {
-                Node temp = new Node( x, y, textMaze[x][y]);
-                nodeMaze[x][y] = temp;
-                if(temp.getBase()){
-                    baseNodes.add(temp);
-                }else {
-                    emptyNodes.add(temp);
-                }
+    public Maze() {
+        nodeMaze = new Node[4][4];
+        int gold = (int) (Math.random() * 15);
+        int wumpus = (int) (Math.random() * 15);
+        int numNodes = 0;
+        boolean tempList[] = new boolean[0000000]; //0 Breeze, 1 wumpus, 2 stench, 3 pit, 4 glitter, 5 gold, 6 start.
+        tempList[6] = true;
+        nodeMaze[0][0] = new Node( 0, 0, tempList);
+        for (int x = 0; x < 4; x++) {
+            for (int y = 1; y < 4; y++) {
+
+                nodeMaze[x][y] = new Node( x, y, );
             }
         }
-        numOfLines = baseNodes.size()/2;
-        for (Node emptyNode : emptyNodes) {
-            emptyNode.instantiatePossibleValues(numOfLines);
-        }
+
     }
 
     public void printMaze() {                       //will print out the maze, printing each nodes value which is a char

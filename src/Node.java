@@ -1,44 +1,11 @@
 class Node {
     private int xCoord;
     private int yCoord;
-    private int numOptions;
-    private char value;
-    private boolean base;
-    private boolean[] possibleValues;
+    private boolean[] attributes ; //0 Breeze, 1 wumpus, 2 stench, 3 pit, 4 glitter, 5 gold, 6 start.
 
-    public Node (int inX, int inY, char inValue) {
+    public Node (int inX, int inY, boolean[] inAttributes) {
         xCoord = inX;
         yCoord = inY;
-        value = inValue;
-        base = value != '_';
-    }
-
-    public int getX(){
-        return xCoord;
-    }
-
-    public int getY(){
-        return yCoord;
-    }
-
-    public char getValue(){
-        return value;
-    }
-
-    public void setValue(char inValue){
-        value = inValue;
-    }
-
-    public void instantiatePossibleValues(int inSize){
-        possibleValues = new boolean[inSize];
-        numOptions =  inSize;
-    }
-
-    public void setPossibleValues(boolean[] inValues){
-        possibleValues = inValues;
-    }
-
-    public Boolean getBase() {
-        return base;
+        attributes = inAttributes;
     }
 }
